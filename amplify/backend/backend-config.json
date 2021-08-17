@@ -1,13 +1,13 @@
 {
   "auth": {
-    "boyaki08bde4f8": {
+    "boyaki913f6a7f": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "loginMechanism": [
-          "EMAIL"
+          "PREFERRED_USERNAME"
         ],
         "signupAttributes": [
           "EMAIL"
@@ -20,6 +20,23 @@
         "mfaTypes": [
           "SMS"
         ]
+      }
+    }
+  },
+  "api": {
+    "BoyakiGql": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authboyaki913f6a7f"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
       }
     }
   }
