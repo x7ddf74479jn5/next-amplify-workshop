@@ -31,89 +31,6 @@ export const listPosts = /* GraphQL */ `
     }
   }
 `;
-export const listPostsSortedByTimestamp = /* GraphQL */ `
-  query ListPostsSortedByTimestamp(
-    $type: String
-    $timestamp: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPostsSortedByTimestamp(
-      type: $type
-      timestamp: $timestamp
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        type
-        id
-        content
-        owner
-        timestamp
-      }
-      nextToken
-    }
-  }
-`;
-export const listPostsBySpecificOwner = /* GraphQL */ `
-  query ListPostsBySpecificOwner(
-    $owner: String
-    $timestamp: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPostsBySpecificOwner(
-      owner: $owner
-      timestamp: $timestamp
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        type
-        id
-        content
-        owner
-        timestamp
-      }
-      nextToken
-    }
-  }
-`;
-export const searchPosts = /* GraphQL */ `
-  query SearchPosts(
-    $filter: SearchablePostFilterInput
-    $sort: SearchablePostSortInput
-    $limit: Int
-    $nextToken: String
-    $from: Int
-  ) {
-    searchPosts(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-    ) {
-      items {
-        type
-        id
-        content
-        owner
-        timestamp
-      }
-      nextToken
-      total
-    }
-  }
-`;
 export const getFollowRelationship = /* GraphQL */ `
   query GetFollowRelationship($followeeId: ID!, $followerId: ID!) {
     getFollowRelationship(followeeId: $followeeId, followerId: $followerId) {
@@ -195,6 +112,89 @@ export const listTimelines = /* GraphQL */ `
         }
       }
       nextToken
+    }
+  }
+`;
+export const listPostsSortedByTimestamp = /* GraphQL */ `
+  query ListPostsSortedByTimestamp(
+    $type: String
+    $timestamp: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPostsSortedByTimestamp(
+      type: $type
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        type
+        id
+        content
+        owner
+        timestamp
+      }
+      nextToken
+    }
+  }
+`;
+export const listPostsBySpecificOwner = /* GraphQL */ `
+  query ListPostsBySpecificOwner(
+    $owner: String
+    $timestamp: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPostsBySpecificOwner(
+      owner: $owner
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        type
+        id
+        content
+        owner
+        timestamp
+      }
+      nextToken
+    }
+  }
+`;
+export const searchPosts = /* GraphQL */ `
+  query SearchPosts(
+    $filter: SearchablePostFilterInput
+    $sort: SearchablePostSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchPosts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        type
+        id
+        content
+        owner
+        timestamp
+      }
+      nextToken
+      total
     }
   }
 `;

@@ -11,12 +11,8 @@ export type Post = {
   timestamp: number,
 };
 
-export type CreatePostInput = {
-  type: string,
-  id?: string | null,
-  content: string,
-  owner?: string | null,
-  timestamp: number,
+export type DeletePostInput = {
+  id: string,
 };
 
 export type ModelPostConditionInput = {
@@ -80,14 +76,9 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type DeletePostInput = {
-  id: string,
-};
-
-export type CreateFollowRelationshipInput = {
+export type DeleteFollowRelationshipInput = {
   followeeId: string,
   followerId: string,
-  timestamp: number,
 };
 
 export type ModelFollowRelationshipConditionInput = {
@@ -104,9 +95,18 @@ export type FollowRelationship = {
   timestamp: number,
 };
 
-export type DeleteFollowRelationshipInput = {
+export type CreatePostInput = {
+  type: string,
+  id?: string | null,
+  content: string,
+  owner?: string | null,
+  timestamp: number,
+};
+
+export type CreateFollowRelationshipInput = {
   followeeId: string,
   followerId: string,
+  timestamp: number,
 };
 
 export type CreateTimelineInput = {
@@ -163,6 +163,37 @@ export type ModelPostConnection = {
   nextToken?: string | null,
 };
 
+export type ModelIDKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export type ModelFollowRelationshipFilterInput = {
+  followeeId?: ModelIDInput | null,
+  followerId?: ModelIDInput | null,
+  timestamp?: ModelIntInput | null,
+  and?: Array< ModelFollowRelationshipFilterInput | null > | null,
+  or?: Array< ModelFollowRelationshipFilterInput | null > | null,
+  not?: ModelFollowRelationshipFilterInput | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelFollowRelationshipConnection = {
+  __typename: "ModelFollowRelationshipConnection",
+  items?:  Array<FollowRelationship | null > | null,
+  nextToken?: string | null,
+};
+
 export type ModelIntKeyConditionInput = {
   eq?: number | null,
   le?: number | null,
@@ -172,11 +203,20 @@ export type ModelIntKeyConditionInput = {
   between?: Array< number | null > | null,
 };
 
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
+export type ModelTimelineFilterInput = {
+  userId?: ModelIDInput | null,
+  timestamp?: ModelIntInput | null,
+  postId?: ModelIDInput | null,
+  and?: Array< ModelTimelineFilterInput | null > | null,
+  or?: Array< ModelTimelineFilterInput | null > | null,
+  not?: ModelTimelineFilterInput | null,
+};
 
+export type ModelTimelineConnection = {
+  __typename: "ModelTimelineConnection",
+  items?:  Array<Timeline | null > | null,
+  nextToken?: string | null,
+};
 
 export type SearchablePostFilterInput = {
   type?: SearchableStringFilterInput | null,
@@ -260,68 +300,12 @@ export type SearchablePostConnection = {
   total?: number | null,
 };
 
-export type ModelIDKeyConditionInput = {
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-};
-
-export type ModelFollowRelationshipFilterInput = {
-  followeeId?: ModelIDInput | null,
-  followerId?: ModelIDInput | null,
-  timestamp?: ModelIntInput | null,
-  and?: Array< ModelFollowRelationshipFilterInput | null > | null,
-  or?: Array< ModelFollowRelationshipFilterInput | null > | null,
-  not?: ModelFollowRelationshipFilterInput | null,
-};
-
-export type ModelFollowRelationshipConnection = {
-  __typename: "ModelFollowRelationshipConnection",
-  items?:  Array<FollowRelationship | null > | null,
-  nextToken?: string | null,
-};
-
-export type ModelTimelineFilterInput = {
-  userId?: ModelIDInput | null,
-  timestamp?: ModelIntInput | null,
-  postId?: ModelIDInput | null,
-  and?: Array< ModelTimelineFilterInput | null > | null,
-  or?: Array< ModelTimelineFilterInput | null > | null,
-  not?: ModelTimelineFilterInput | null,
-};
-
-export type ModelTimelineConnection = {
-  __typename: "ModelTimelineConnection",
-  items?:  Array<Timeline | null > | null,
-  nextToken?: string | null,
-};
-
 export type CreatePostAndTimelineMutationVariables = {
   content: string,
 };
 
 export type CreatePostAndTimelineMutation = {
   createPostAndTimeline?:  {
-    __typename: "Post",
-    type: string,
-    id?: string | null,
-    content: string,
-    owner?: string | null,
-    timestamp: number,
-  } | null,
-};
-
-export type CreatePostMutationVariables = {
-  input: CreatePostInput,
-  condition?: ModelPostConditionInput | null,
-};
-
-export type CreatePostMutation = {
-  createPost?:  {
     __typename: "Post",
     type: string,
     id?: string | null,
@@ -347,20 +331,6 @@ export type DeletePostMutation = {
   } | null,
 };
 
-export type CreateFollowRelationshipMutationVariables = {
-  input: CreateFollowRelationshipInput,
-  condition?: ModelFollowRelationshipConditionInput | null,
-};
-
-export type CreateFollowRelationshipMutation = {
-  createFollowRelationship?:  {
-    __typename: "FollowRelationship",
-    followeeId: string,
-    followerId: string,
-    timestamp: number,
-  } | null,
-};
-
 export type DeleteFollowRelationshipMutationVariables = {
   input: DeleteFollowRelationshipInput,
   condition?: ModelFollowRelationshipConditionInput | null,
@@ -368,6 +338,36 @@ export type DeleteFollowRelationshipMutationVariables = {
 
 export type DeleteFollowRelationshipMutation = {
   deleteFollowRelationship?:  {
+    __typename: "FollowRelationship",
+    followeeId: string,
+    followerId: string,
+    timestamp: number,
+  } | null,
+};
+
+export type CreatePostMutationVariables = {
+  input: CreatePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type CreatePostMutation = {
+  createPost?:  {
+    __typename: "Post",
+    type: string,
+    id?: string | null,
+    content: string,
+    owner?: string | null,
+    timestamp: number,
+  } | null,
+};
+
+export type CreateFollowRelationshipMutationVariables = {
+  input: CreateFollowRelationshipInput,
+  condition?: ModelFollowRelationshipConditionInput | null,
+};
+
+export type CreateFollowRelationshipMutation = {
+  createFollowRelationship?:  {
     __typename: "FollowRelationship",
     followeeId: string,
     followerId: string,
@@ -430,78 +430,6 @@ export type ListPostsQuery = {
       timestamp: number,
     } | null > | null,
     nextToken?: string | null,
-  } | null,
-};
-
-export type ListPostsSortedByTimestampQueryVariables = {
-  type?: string | null,
-  timestamp?: ModelIntKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelPostFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPostsSortedByTimestampQuery = {
-  listPostsSortedByTimestamp?:  {
-    __typename: "ModelPostConnection",
-    items?:  Array< {
-      __typename: "Post",
-      type: string,
-      id?: string | null,
-      content: string,
-      owner?: string | null,
-      timestamp: number,
-    } | null > | null,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ListPostsBySpecificOwnerQueryVariables = {
-  owner?: string | null,
-  timestamp?: ModelIntKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelPostFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPostsBySpecificOwnerQuery = {
-  listPostsBySpecificOwner?:  {
-    __typename: "ModelPostConnection",
-    items?:  Array< {
-      __typename: "Post",
-      type: string,
-      id?: string | null,
-      content: string,
-      owner?: string | null,
-      timestamp: number,
-    } | null > | null,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type SearchPostsQueryVariables = {
-  filter?: SearchablePostFilterInput | null,
-  sort?: SearchablePostSortInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  from?: number | null,
-};
-
-export type SearchPostsQuery = {
-  searchPosts?:  {
-    __typename: "SearchablePostConnection",
-    items?:  Array< {
-      __typename: "Post",
-      type: string,
-      id?: string | null,
-      content: string,
-      owner?: string | null,
-      timestamp: number,
-    } | null > | null,
-    nextToken?: string | null,
-    total?: number | null,
   } | null,
 };
 
@@ -593,6 +521,78 @@ export type ListTimelinesQuery = {
   } | null,
 };
 
+export type ListPostsSortedByTimestampQueryVariables = {
+  type?: string | null,
+  timestamp?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostsSortedByTimestampQuery = {
+  listPostsSortedByTimestamp?:  {
+    __typename: "ModelPostConnection",
+    items?:  Array< {
+      __typename: "Post",
+      type: string,
+      id?: string | null,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListPostsBySpecificOwnerQueryVariables = {
+  owner?: string | null,
+  timestamp?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostsBySpecificOwnerQuery = {
+  listPostsBySpecificOwner?:  {
+    __typename: "ModelPostConnection",
+    items?:  Array< {
+      __typename: "Post",
+      type: string,
+      id?: string | null,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type SearchPostsQueryVariables = {
+  filter?: SearchablePostFilterInput | null,
+  sort?: SearchablePostSortInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+};
+
+export type SearchPostsQuery = {
+  searchPosts?:  {
+    __typename: "SearchablePostConnection",
+    items?:  Array< {
+      __typename: "Post",
+      type: string,
+      id?: string | null,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+    } | null > | null,
+    nextToken?: string | null,
+    total?: number | null,
+  } | null,
+};
+
 export type OnCreatePostSubscription = {
   onCreatePost?:  {
     __typename: "Post",
@@ -634,7 +634,7 @@ export type OnDeleteFollowRelationshipSubscription = {
 };
 
 export type OnCreateTimelineSubscriptionVariables = {
-  userId?: string | null,
+  userId: string,
 };
 
 export type OnCreateTimelineSubscription = {

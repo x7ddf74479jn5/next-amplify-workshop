@@ -43,7 +43,7 @@ export const onDeleteFollowRelationship = /* GraphQL */ `
   }
 `;
 export const onCreateTimeline = /* GraphQL */ `
-  subscription OnCreateTimeline($userId: String) {
+  subscription OnCreateTimeline($userId: String!) {
     onCreateTimeline(userId: $userId) {
       userId
       timestamp
