@@ -48,18 +48,13 @@ type ActionType = "INITIAL_QUERY" | "ADDITIONAL_QUERY" | "SUBSCRIPTION";
 
 type PostSubscriptionEvent = { value: { data: OnCreatePostSubscription } };
 
-// const INITIAL_QUERY = "INITIAL_QUERY";
-// const ADDITIONAL_QUERY = "ADDITIONAL_QUERY";
-
 const SUBSCRIPTION = "SUBSCRIPTION";
 const INITIAL_QUERY = "INITIAL_QUERY";
 const ADDITIONAL_QUERY = "ADDITIONAL_QUERY";
 
 export default function PostsBySpecifiedUser() {
-  // const { userId }: { userId: string } = useParams();
   const router = useRouter();
   const [userId, setUserId] = useState("");
-  // const userId = String(router.query.userId);
 
   const [isFollowing, setIsFollowing] = useState(false);
 
@@ -83,11 +78,6 @@ export default function PostsBySpecifiedUser() {
     )) as GraphQLResult<ListPostsBySpecificOwnerQuery>;
     console.log(res);
     if (res.data?.listPostsBySpecificOwner?.items) {
-      // if (type === "INITIAL_QUERY") {
-      //   appDispatch(initialQuery(res.data.listPostsBySpecificOwner.items));
-      // } else {
-      //   appDispatch(additionalQuery(res.data.listPostsBySpecificOwner.items));
-      // }
       switch (type) {
         case "INITIAL_QUERY": {
           appDispatch(initialQuery(res.data.listPostsBySpecificOwner.items));

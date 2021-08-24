@@ -7,11 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "../app/store";
 
 import type { AppProps } from "next/app";
-import {
-  AmplifyAuthenticator,
-  AmplifySignOut,
-  AmplifySignUp,
-} from "@aws-amplify/ui-react";
+import { AmplifyAuthenticator, AmplifySignUp } from "@aws-amplify/ui-react";
 import {
   AuthState,
   onAuthUIStateChange,
