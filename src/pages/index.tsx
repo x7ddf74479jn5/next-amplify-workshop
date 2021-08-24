@@ -1,15 +1,17 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Timeline from "../containers/Timeline";
 
-const IndexPage: NextPage = () => {
+const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
-        <title>Redux Toolkit</title>
+        <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-    </div>
+      <Timeline />
+    </>
   );
 };
 
-export default IndexPage;
+export default Home;

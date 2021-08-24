@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
-type Post = {
+export type Post = {
   type?: string | undefined;
   id?: string | null | undefined;
   content?: string | undefined;
@@ -22,7 +22,7 @@ const initialState: PostsState = {
 };
 
 export const postsSlice = createSlice({
-  name: 'posts',
+  name: "posts",
   initialState,
   reducers: {
     initialQuery: (state, action: PayloadAction<Post[]>) => {

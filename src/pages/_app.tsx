@@ -99,16 +99,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return authState === AuthState.SignedIn && user ? (
-    // <Provider store={store}>
-    //   <ThemeProvider theme={theme}>
-    //     <CssBaseline />
-    //     <Component {...pageProps} />
-    //   </ThemeProvider>
-    // </Provider>
-    <div className="App">
-      <div>Hello, {user.username}</div>
-      <AmplifySignOut />
-    </div>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Provider>
   ) : (
     <AmplifyAuthenticator>
       <AmplifySignUp

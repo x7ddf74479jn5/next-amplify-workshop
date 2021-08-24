@@ -5,7 +5,8 @@
     "build": "next build && next export",
     "start": "next start",
     "type-check": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "amplify:createPostAndTimeline": "cd amplify/backend/function/createPostAndTimeline && tsc -p ./tsconfig.json && cd -"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.9",
@@ -13,6 +14,7 @@
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.3.6",
     "aws-amplify": "^4.2.3",
+    "dayjs": "^1.10.6",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
