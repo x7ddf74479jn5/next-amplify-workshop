@@ -5,8 +5,7 @@
     "build": "next build && next export",
     "start": "next start",
     "type-check": "tsc",
-    "test": "jest",
-    "amplify:createPostAndTimeline": "cd amplify/backend/function/createPostAndTimeline && tsc -p ./tsconfig.json && cd -"
+    "test": "jest"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.9",
