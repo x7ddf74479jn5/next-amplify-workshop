@@ -95,8 +95,7 @@ export default function PostList({
                   onClick={() => getAdditionalPosts()}
                   className={classes.maxWidth}
                 >
-                  {" "}
-                  Read More{" "}
+                  Read More
                 </Button>
               }
             />
@@ -144,7 +143,7 @@ function PostItem({ post }: ItemProps) {
           <ListItemAvatar>
             <div
               className={classes.clickable}
-              onClick={() => router.push("/" + post.owner)}
+              onClick={() => router.push("/users/" + post.owner)}
             >
               <Avatar alt={post.owner || ""} src="/" />
             </div>

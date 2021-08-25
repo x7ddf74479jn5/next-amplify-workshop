@@ -153,7 +153,7 @@ export default function Sidebar({
           selected={activeListItem === "profile"}
           onClick={() => {
             Auth.currentAuthenticatedUser().then((user) => {
-              router.push("/" + user.username);
+              router.push("/users/" + user.username);
             });
           }}
           key="profile"
