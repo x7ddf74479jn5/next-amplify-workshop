@@ -33,4 +33,8 @@ test:
         - npx start-test 'yarn start' 3000 'npx cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
     postTest:
       commands:
+<<<<<<< HEAD
         - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
+=======
+        - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
+>>>>>>> 026723ce5a533b3916c0cc7b6847b80e61bfab6a
