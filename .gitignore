@@ -37,6 +37,7 @@ yarn-error.log*
 refs
 amplify
 team-provider-info.json
+.env
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
